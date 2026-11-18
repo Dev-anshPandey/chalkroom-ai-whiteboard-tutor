@@ -6,7 +6,8 @@ Project: Chalkroom — Interactive Whiteboard Tutor
 - Source code: https://github.com/Dev-anshPandey/chalkroom-ai-whiteboard-tutor
 - Live demo: https://chalkroom-devansh-braynix.devanshpandey87.chatgpt.site
 - Live AI: Google Gemini configured as a server-side runtime secret.
-- Submission form: not submitted.
+- Submission form: submitted successfully on 18 November 2026.
+- Confirmation: “Your assignment has been submitted successfully. Thank you for completing the Braynix Studios assignment!”
 
 Official assignment: https://github.com/Braynix-Studios/ai-whiteboard-tutor-assignment
 Official form: https://docs.google.com/forms/d/e/1FAIpQLSdFJoTxMEuFZrCHTbEgv7bbg2uLf33SjP7n0w2qUONR4kMRcA/viewform
