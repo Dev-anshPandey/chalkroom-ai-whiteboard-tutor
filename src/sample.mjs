@@ -1,0 +1,16 @@
+const shape=(kind,text,x,y,w=0,h=0,color='ink')=>({kind,text,x,y,w,h,color});
+export const sampleLesson={title:'Binary search, made visible',summary:'Find one item in a sorted list by cutting the search space in half.',scenes:[
+{title:'A smarter way to search',cues:[
+{narration:'Imagine finding a name in a dictionary. You could read every page, but you already know a useful fact: the names are sorted. Binary search uses that order to rule out large groups of possibilities with just one comparison.',shapes:[shape('text','Find 23 in a sorted list',70,65),...[3,7,11,15,19,23,27,31].map((n,i)=>shape('box',String(n),65+i*97,175,80,70,i===5?'teal':'ink'))]},
+{narration:'Our target is twenty three. A linear search checks items one at a time. Instead, we will inspect the middle item and decide which half can still contain the target. The order of the list makes that decision reliable.',shapes:[shape('text','Sorted order lets us eliminate possibilities.',90,330,0,0,'teal'),shape('arrow','',590,115,0,45,'teal')]}
+]},
+{title:'Compare with the middle',cues:[
+{narration:'Start with the whole list. Using zero based positions, the left boundary is zero and the right boundary is seven. Round the average down to get position three. That middle value is fifteen. Compare fifteen with our target, twenty three.',shapes:[...[3,7,11,15,19,23,27,31].map((n,i)=>shape('box',String(n),65+i*97,175,80,70,i===3?'orange':'ink')),shape('text','mid = floor((0 + 7) / 2) = 3',85,70),shape('arrow','',396,115,0,45,'orange')]},
+{narration:'Twenty three is greater than fifteen. Because every item on the left is also smaller, we can safely discard that entire half, including the middle item. Set left to middle plus one. Our remaining positions are four through seven.',shapes:[shape('line','',65,210,370,0,'orange'),shape('text','23 > 15 → keep the right half',90,340,0,0,'teal')]}
+]},
+{title:'Halve the remaining range',cues:[
+{narration:'Now the left boundary is four and the right boundary is seven. Their rounded down average is five. Position five contains twenty three, exactly our target. We found it in two comparisons instead of checking six items from the beginning.',shapes:[...[19,23,27,31].map((n,i)=>shape('box',String(n),230+i*115,180,95,80,i===1?'teal':'ink')),shape('text','mid = floor((4 + 7) / 2) = 5',95,70),shape('arrow','',390,120,0,45,'teal'),shape('text','23 = target. Found at index 5.',150,350,0,0,'teal')]}
+]},
+{title:'Why it scales',cues:[
+{narration:'Each unsuccessful comparison halves the remaining range. A list of sixty four items shrinks to thirty two, sixteen, eight, four, two, and one. That is why binary search takes logarithmic time. Remember the essential condition: the data must already be sorted.',shapes:[shape('text','Each step removes half the possibilities',65,65),...[64,32,16,8,4,2,1].map((n,i)=>shape('bar',String(n),85+i*105,140,65,Math.max(8,n*3),'teal')),shape('text','O(log n) comparisons • Sorted data required',100,440,0,0,'orange')]}
+]}],quiz:{question:'The middle value is larger than your target. What should change?',options:['Move left to mid + 1','Move right to mid − 1','Discard both halves'],answer:1,explanation:'In a sorted list, the middle and everything to its right are too large. Continue with the left half by moving right to mid − 1.'}};

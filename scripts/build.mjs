@@ -1,0 +1,11 @@
+import {readFile,writeFile,mkdir,cp} from 'node:fs/promises';
+await mkdir('dist/server',{recursive:true}); await mkdir('dist/.openai',{recursive:true});
+const files=['index.html','style.css','app.js'];
+const assets=Object.fromEntries(await Promise.all(files.map(async f=>['/'+(f==='index.html'?'':f),await readFile('public/'+f,'utf8')])));
+let core=await readFile('src/core.mjs','utf8');
+let sample=await readFile('src/sample.mjs','utf8');
+let worker=await readFile('worker/index.js','utf8');
+worker=worker.replace(/^import .*;\n/gm,'');
+await writeFile('dist/server/index.js',`const assets=${JSON.stringify(assets)};\nconst CORE_SOURCE=${JSON.stringify(core)};\n${core}\n${sample}\n${worker}`);
+await cp('.openai/hosting.json','dist/.openai/hosting.json');
+console.log('Built self-contained Cloudflare Worker.');
